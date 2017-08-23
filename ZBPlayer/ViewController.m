@@ -53,30 +53,32 @@
     _progressView.progress = 0;
   
     
+    //1.
+    //NSURL *URL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"4k" ofType:@"mp4"]];
     
+    
+    //2.
     NSArray *arr  = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     // 获取文件管理者
     NSFileManager *mgr = [NSFileManager defaultManager];
-    
-    
     // 获取cache文件夹下所有文件,不包括子路径的子路径
     NSArray *subPaths = [mgr contentsOfDirectoryAtPath:[ arr lastObject] error:nil];
     
     NSURL *remoteURL = [NSURL URLWithString:[[ arr lastObject] stringByAppendingPathComponent:[subPaths lastObject]]];
-    
-    
-
     NSString *tr = [remoteURL absoluteString] ;
-    
     tr = [@"file:///" stringByAppendingString:tr];
-    
     NSURL * urllll = [NSURL URLWithString:tr];
-    
-//    NSURL *URL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"4k" ofType:@"mp4"]];
     
     
     self.player = [[SBPlayer alloc]initWithUrl:urllll];
     
+    
+    
+    
+
+    
+    
+  
     
     
     
