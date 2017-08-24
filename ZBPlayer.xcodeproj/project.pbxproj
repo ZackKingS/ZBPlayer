@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A03093F1F4EE42200465876 /* ZBTabbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A03093E1F4EE42200465876 /* ZBTabbarController.m */; };
+		3A0309421F4EE4A300465876 /* ZBNavgationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0309411F4EE4A300465876 /* ZBNavgationController.m */; };
+		3A0309461F4EE4D600465876 /* DownLoadingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0309441F4EE4D600465876 /* DownLoadingController.m */; };
+		3A0309471F4EE4D600465876 /* DownLoadingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A0309451F4EE4D600465876 /* DownLoadingController.xib */; };
+		3A03094B1F4EE4FD00465876 /* DownLoadedController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0309491F4EE4FD00465876 /* DownLoadedController.m */; };
+		3A03094C1F4EE4FD00465876 /* DownLoadedController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A03094A1F4EE4FD00465876 /* DownLoadedController.xib */; };
+		3A0309541F4EE7FF00465876 /* MoviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0309521F4EE7FF00465876 /* MoviewCell.m */; };
+		3A0309551F4EE7FF00465876 /* MoviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A0309531F4EE7FF00465876 /* MoviewCell.xib */; };
+		3A03095A1F4EECFB00465876 /* AddingMovieController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0309581F4EECFB00465876 /* AddingMovieController.m */; };
+		3A03095B1F4EECFB00465876 /* AddingMovieController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A0309591F4EECFB00465876 /* AddingMovieController.xib */; };
 		3A2911A11F4C034C0092C693 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2911A01F4C034C0092C693 /* main.m */; };
 		3A2911A41F4C034C0092C693 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2911A31F4C034C0092C693 /* AppDelegate.m */; };
 		3A2911A71F4C034C0092C693 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2911A61F4C034C0092C693 /* ViewController.m */; };
@@ -40,6 +50,22 @@
 
 /* Begin PBXFileReference section */
 		10A616E21C3D305A3C342298 /* Pods-ZBPlayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZBPlayer.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZBPlayer/Pods-ZBPlayer.release.xcconfig"; sourceTree = "<group>"; };
+		3A03093D1F4EE42200465876 /* ZBTabbarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBTabbarController.h; sourceTree = "<group>"; };
+		3A03093E1F4EE42200465876 /* ZBTabbarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZBTabbarController.m; sourceTree = "<group>"; };
+		3A0309401F4EE4A300465876 /* ZBNavgationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBNavgationController.h; sourceTree = "<group>"; };
+		3A0309411F4EE4A300465876 /* ZBNavgationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZBNavgationController.m; sourceTree = "<group>"; };
+		3A0309431F4EE4D600465876 /* DownLoadingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownLoadingController.h; sourceTree = "<group>"; };
+		3A0309441F4EE4D600465876 /* DownLoadingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownLoadingController.m; sourceTree = "<group>"; };
+		3A0309451F4EE4D600465876 /* DownLoadingController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DownLoadingController.xib; sourceTree = "<group>"; };
+		3A0309481F4EE4FD00465876 /* DownLoadedController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownLoadedController.h; sourceTree = "<group>"; };
+		3A0309491F4EE4FD00465876 /* DownLoadedController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownLoadedController.m; sourceTree = "<group>"; };
+		3A03094A1F4EE4FD00465876 /* DownLoadedController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DownLoadedController.xib; sourceTree = "<group>"; };
+		3A0309511F4EE7FF00465876 /* MoviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoviewCell.h; sourceTree = "<group>"; };
+		3A0309521F4EE7FF00465876 /* MoviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoviewCell.m; sourceTree = "<group>"; };
+		3A0309531F4EE7FF00465876 /* MoviewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoviewCell.xib; sourceTree = "<group>"; };
+		3A0309571F4EECFB00465876 /* AddingMovieController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddingMovieController.h; sourceTree = "<group>"; };
+		3A0309581F4EECFB00465876 /* AddingMovieController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddingMovieController.m; sourceTree = "<group>"; };
+		3A0309591F4EECFB00465876 /* AddingMovieController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddingMovieController.xib; sourceTree = "<group>"; };
 		3A29119C1F4C034C0092C693 /* ZBPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZBPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A2911A01F4C034C0092C693 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3A2911A21F4C034C0092C693 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -115,6 +141,59 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		3A03094D1F4EE66700465876 /* downLoaded */ = {
+			isa = PBXGroup;
+			children = (
+				3A0309481F4EE4FD00465876 /* DownLoadedController.h */,
+				3A0309491F4EE4FD00465876 /* DownLoadedController.m */,
+				3A03094A1F4EE4FD00465876 /* DownLoadedController.xib */,
+			);
+			name = downLoaded;
+			sourceTree = "<group>";
+		};
+		3A03094E1F4EE67900465876 /* dowLoading */ = {
+			isa = PBXGroup;
+			children = (
+				3A0309501F4EE7D500465876 /* Controller */,
+				3A0309561F4EE80900465876 /* View */,
+			);
+			name = dowLoading;
+			sourceTree = "<group>";
+		};
+		3A03094F1F4EE68500465876 /* main */ = {
+			isa = PBXGroup;
+			children = (
+				3A03093D1F4EE42200465876 /* ZBTabbarController.h */,
+				3A03093E1F4EE42200465876 /* ZBTabbarController.m */,
+				3A0309401F4EE4A300465876 /* ZBNavgationController.h */,
+				3A0309411F4EE4A300465876 /* ZBNavgationController.m */,
+			);
+			name = main;
+			sourceTree = "<group>";
+		};
+		3A0309501F4EE7D500465876 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				3A0309431F4EE4D600465876 /* DownLoadingController.h */,
+				3A0309441F4EE4D600465876 /* DownLoadingController.m */,
+				3A0309451F4EE4D600465876 /* DownLoadingController.xib */,
+				3A0309571F4EECFB00465876 /* AddingMovieController.h */,
+				3A0309581F4EECFB00465876 /* AddingMovieController.m */,
+				3A0309591F4EECFB00465876 /* AddingMovieController.xib */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		3A0309561F4EE80900465876 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3A0309511F4EE7FF00465876 /* MoviewCell.h */,
+				3A0309521F4EE7FF00465876 /* MoviewCell.m */,
+				3A0309531F4EE7FF00465876 /* MoviewCell.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		3A2911931F4C034C0092C693 = {
 			isa = PBXGroup;
 			children = (
@@ -142,6 +221,9 @@
 				3A2911A31F4C034C0092C693 /* AppDelegate.m */,
 				3A2911A51F4C034C0092C693 /* ViewController.h */,
 				3A2911A61F4C034C0092C693 /* ViewController.m */,
+				3A03094F1F4EE68500465876 /* main */,
+				3A03094E1F4EE67900465876 /* dowLoading */,
+				3A03094D1F4EE66700465876 /* downLoaded */,
 				3A2911A81F4C034C0092C693 /* Main.storyboard */,
 				3A9732EA1F4D753400CA631A /* 4k.mp4 */,
 				3A2911AB1F4C034C0092C693 /* Assets.xcassets */,
@@ -296,7 +378,9 @@
 				3A2911AF1F4C034C0092C693 /* LaunchScreen.storyboard in Resources */,
 				3A2911AC1F4C034C0092C693 /* Assets.xcassets in Resources */,
 				3A9732E91F4D73F900CA631A /* play@2x.png in Resources */,
+				3A0309551F4EE7FF00465876 /* MoviewCell.xib in Resources */,
 				3A9732E31F4D73F900CA631A /* full_screen.png in Resources */,
+				3A03095B1F4EECFB00465876 /* AddingMovieController.xib in Resources */,
 				3A9732E41F4D73F900CA631A /* full_screen@2x.png in Resources */,
 				3A9732E61F4D73F900CA631A /* pause.png in Resources */,
 				3A9732E51F4D73F900CA631A /* knob.png in Resources */,
@@ -304,6 +388,8 @@
 				3A9732EB1F4D753400CA631A /* 4k.mp4 in Resources */,
 				3A9732E71F4D73F900CA631A /* pause@2x.png in Resources */,
 				3A9732C51F4D735200CA631A /* Info.plist in Resources */,
+				3A0309471F4EE4D600465876 /* DownLoadingController.xib in Resources */,
+				3A03094C1F4EE4FD00465876 /* DownLoadedController.xib in Resources */,
 				3A2911AA1F4C034C0092C693 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -371,11 +457,17 @@
 				3A9732CE1F4D735200CA631A /* View+MASAdditions.m in Sources */,
 				3A9732E11F4D73F900CA631A /* SBPauseOrPlayView.m in Sources */,
 				3A2911A41F4C034C0092C693 /* AppDelegate.m in Sources */,
+				3A03093F1F4EE42200465876 /* ZBTabbarController.m in Sources */,
+				3A03095A1F4EECFB00465876 /* AddingMovieController.m in Sources */,
 				3A9732CA1F4D735200CA631A /* MASViewAttribute.m in Sources */,
 				3A9732CD1F4D735200CA631A /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				3A9732E01F4D73F900CA631A /* SBControlView.m in Sources */,
 				3A9732E21F4D73F900CA631A /* SBPlayer.m in Sources */,
+				3A0309421F4EE4A300465876 /* ZBNavgationController.m in Sources */,
+				3A03094B1F4EE4FD00465876 /* DownLoadedController.m in Sources */,
+				3A0309461F4EE4D600465876 /* DownLoadingController.m in Sources */,
 				3A9732CC1F4D735200CA631A /* NSArray+MASAdditions.m in Sources */,
+				3A0309541F4EE7FF00465876 /* MoviewCell.m in Sources */,
 				3A9732CB1F4D735200CA631A /* MASViewConstraint.m in Sources */,
 				3A2911A11F4C034C0092C693 /* main.m in Sources */,
 				3A9732C91F4D735200CA631A /* MASLayoutConstraint.m in Sources */,

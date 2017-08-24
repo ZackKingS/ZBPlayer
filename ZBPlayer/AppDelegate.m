@@ -7,15 +7,8 @@
 //
 
 #import "AppDelegate.h"
-#import <CocoaLumberjack.h>
-#ifdef DEBUG
-static const int ddLogLevel = DDLogLevelVerbose;
-#else
-static const int ddLogLevel = DDLogLevelWarning;
-#endif
 
-
-    
+#import "ZBTabBarController.h"
   
 
 @interface AppDelegate ()
@@ -30,26 +23,25 @@ static const int ddLogLevel = DDLogLevelWarning;
     
     
     
-    //配置DDLog
-    [DDLog addLogger:[DDTTYLogger sharedInstance]]; // TTY = Xcode console
-    [DDLog addLogger:[DDASLLogger sharedInstance]]; // ASL = Apple System Logs
+    // 1.创建窗口
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
-    DDFileLogger *fileLogger = [[DDFileLogger alloc] init]; // File Logger
-    fileLogger.rollingFrequency = 60 * 60 * 24; // 24 hour rolling
-    fileLogger.logFileManager.maximumNumberOfLogFiles = 7;
-    [DDLog addLogger:fileLogger];
+    // 2.设置窗口的跟控制器
+    //    ZBTabBarController *main =[[ZBTabBarController alloc ]init];
+    //
     
-    //针对单个文件配置DDLog打印级别，尚未测试
-    //    [DDLog setLevel:DDLogLevelAll forClass:nil];
     
-    NSLog(@"NSLog");
-    DDLogVerbose(@"Verbose");
-    DDLogDebug(@"Debug");
-    DDLogInfo(@"Info");
-    DDLogWarn(@"Warn");
-    DDLogError(@"Error");
     
-    DDLogError(NSHomeDirectory());
+    self.window.rootViewController =[[ZBTabbarController alloc]init];
+    
+    
+    
+    
+    // 3,让窗口显示
+    [self.window makeKeyAndVisible];
+    
+    
+    
     return YES;
     
    
