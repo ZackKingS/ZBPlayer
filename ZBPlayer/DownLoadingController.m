@@ -56,10 +56,7 @@ NSString * const MYID = @"MovieCell";
         if (exist) {  //已经存在
             
             NSString *newStr = [NSString stringWithContentsOfFile:strPath encoding:NSUTF8StringEncoding error:nil];
-
             NSArray  *array = [newStr componentsSeparatedByString:@" "];//分隔符逗号
-            
-            
             _movieArr = [NSMutableArray  arrayWithArray:array];
             
             
@@ -143,15 +140,7 @@ NSString * const MYID = @"MovieCell";
         
   
         NSString *strPath = [documentsPath stringByAppendingPathComponent:@"text.txt"];
-        
-
-//        [self.movieArr addObject:str];
-        
-            
         NSString *string = [self.movieArr componentsJoinedByString:@" "];
-            
-            
-            
         [string writeToFile:strPath atomically:YES encoding:NSUTF8StringEncoding error:nil];
         NSString *newStr = [NSString stringWithContentsOfFile:strPath encoding:NSUTF8StringEncoding error:nil];
         NSLog(@"%@", newStr);
@@ -249,6 +238,7 @@ NSString * const MYID = @"MovieCell";
     
     
     
+    
 }
 
 
@@ -291,9 +281,9 @@ NSString * const MYID = @"MovieCell";
     
     NSLog(@"%@",self.movieArr);
     
-    player.url =   [NSURL URLWithString:self.movieArr[indexPath.row]]  ;
+//    player.url =   [NSURL URLWithString:self.movieArr[indexPath.row]]  ;
     
-    player.key = [NSString stringWithFormat:@"%d",self.movieArr.count];
+    player.key = [NSString stringWithFormat:@"%d",indexPath.row+1];
 
     [self.navigationController pushViewController:player animated:YES];
     

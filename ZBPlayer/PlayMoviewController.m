@@ -30,11 +30,11 @@
 //    NSURL *URL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"4k" ofType:@"mp4"]];
     
     
-    NSString *str= [[NSUserDefaults standardUserDefaults] objectForKey:self.key];
+    NSString *url= [[NSUserDefaults standardUserDefaults] objectForKey:self.key];
 
     
     
-    self.player = [[SBPlayer alloc]initWithUrl:[NSURL URLWithString:str]];
+    self.player = [[SBPlayer alloc]initWithUrl:[NSURL URLWithString:url]];
     
     
 
