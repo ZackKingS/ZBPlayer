@@ -21,7 +21,7 @@
 @property (nonatomic, strong) NSData *resumData;
 @property (nonatomic, strong) NSURLSession *session;
 
-@property (nonatomic,strong) MPMoviePlayerController *mpcontrol;
+
 
 
 @property (weak, nonatomic) IBOutlet UILabel *progressTitle;
@@ -75,14 +75,6 @@
     
     
     
-
-    
-    
-  
-    
-    
-    
-    
     
     //设置标题
     [self.player setTitle:@"这是一个标题"];
@@ -99,11 +91,7 @@
         make.height.mas_equalTo(@250);
     }];
     
-    
-    
-    
-
-
+  
 }
 
 
