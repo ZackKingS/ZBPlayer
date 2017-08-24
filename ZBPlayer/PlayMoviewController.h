@@ -11,4 +11,7 @@
 @interface PlayMoviewController : UIViewController
 
 @property(nonatomic,strong)NSURL *url;
+
+@property(nonatomic,strong)NSString *key;
+
 @end

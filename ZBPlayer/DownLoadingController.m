@@ -41,11 +41,45 @@ NSString * const MYID = @"MovieCell";
     
     if (!_movieArr) {
         
-        _movieArr = [NSMutableArray array];
+   
         
-        [_movieArr addObject:@"海贼王"];
-        [_movieArr addObject:@"死神"];
-        [_movieArr addObject:@"火影"];
+        NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        
+
+        NSString *strPath = [documentsPath stringByAppendingPathComponent:@"text.txt"];
+        
+        BOOL exist =   [[ [NSFileManager alloc]init]  fileExistsAtPath:strPath];
+        
+        
+       
+        
+        if (exist) {  //已经存在
+            
+            NSString *newStr = [NSString stringWithContentsOfFile:strPath encoding:NSUTF8StringEncoding error:nil];
+
+            NSArray  *array = [newStr componentsSeparatedByString:@" "];//分隔符逗号
+            
+            
+            _movieArr = [NSMutableArray  arrayWithArray:array];
+            
+            
+        }else{
+            
+            // 2.创建要存储的内容：字符串
+            _movieArr = [NSMutableArray array];
+            
+            NSString *string = [_movieArr componentsJoinedByString:@" "];
+            
+            [string writeToFile:strPath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+            NSString *newStr = [NSString stringWithContentsOfFile:strPath encoding:NSUTF8StringEncoding error:nil];
+            NSLog(@"%@", newStr);
+            
+            
+            
+        }
+        
+        
+        
     }
     return _movieArr;
 }
@@ -101,6 +135,31 @@ NSString * const MYID = @"MovieCell";
         [self.movieArr addObject:str];
         
         [self.tableView reloadData];
+        
+        
+        
+        NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        
+        
+  
+        NSString *strPath = [documentsPath stringByAppendingPathComponent:@"text.txt"];
+        
+
+//        [self.movieArr addObject:str];
+        
+            
+        NSString *string = [self.movieArr componentsJoinedByString:@" "];
+            
+            
+            
+        [string writeToFile:strPath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+        NSString *newStr = [NSString stringWithContentsOfFile:strPath encoding:NSUTF8StringEncoding error:nil];
+        NSLog(@"%@", newStr);
+            
+            
+
+        
+        
         
         [self startBtnClick:str];  //下载
         
@@ -184,7 +243,9 @@ NSString * const MYID = @"MovieCell";
 //    NSURL * urllll = [NSURL URLWithString:fullPath];
 
     
-    [[NSUserDefaults standardUserDefaults] setObject:fullPath forKey:@"zburl"];
+    
+    NSString *key =[NSString stringWithFormat:@"%d",self.movieArr.count];
+    [[NSUserDefaults standardUserDefaults] setObject:fullPath forKey:key];
     
     
     
@@ -211,6 +272,7 @@ NSString * const MYID = @"MovieCell";
     MoviewCell *cell = [tableView dequeueReusableCellWithIdentifier:MYID forIndexPath:indexPath];
     
     cell.textLabel.text = self.movieArr[indexPath.row];
+    cell.detailTextLabel.text = @"70%";
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
 
@@ -226,7 +288,13 @@ NSString * const MYID = @"MovieCell";
     PlayMoviewController *player= [[PlayMoviewController alloc]init];
     
     player.hidesBottomBarWhenPushed = YES;
+    
+    NSLog(@"%@",self.movieArr);
+    
     player.url =   [NSURL URLWithString:self.movieArr[indexPath.row]]  ;
+    
+    player.key = [NSString stringWithFormat:@"%d",self.movieArr.count];
+
     [self.navigationController pushViewController:player animated:YES];
     
     
