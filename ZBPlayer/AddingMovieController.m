@@ -28,7 +28,13 @@
 
 - (IBAction)sure:(id)sender {
     
+  
     
+    if (_block) {
+        _block(self.downUrl.text );
+    }
+    
+    [self.navigationController popViewControllerAnimated:YES];
     
 }
 

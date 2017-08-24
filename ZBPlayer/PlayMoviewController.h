@@ -1,5 +1,5 @@
 //
-//  AddingMovieController.h
+//  PlayMoviewController.h
 //  ZBPlayer
 //
 //  Created by 柏超曾 on 2017/8/24.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AddingMovieController : UIViewController
-@property (nonatomic, strong) void(^block)(NSString *str);
+@interface PlayMoviewController : UIViewController
 
+@property(nonatomic,strong)NSURL *url;
 @end
