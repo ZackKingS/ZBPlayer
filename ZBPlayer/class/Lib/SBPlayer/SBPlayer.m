@@ -262,7 +262,9 @@ static NSInteger count = 0;
                 [self mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.edges.mas_equalTo([UIApplication sharedApplication].keyWindow);
                 }];
+                
                 [self layoutIfNeeded];
+                
             } completion:nil];
         }
             break;
