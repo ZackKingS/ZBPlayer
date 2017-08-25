@@ -46,7 +46,6 @@
 		3A9732E71F4D73F900CA631A /* pause@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9732DD1F4D73F900CA631A /* pause@2x.png */; };
 		3A9732E81F4D73F900CA631A /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9732DE1F4D73F900CA631A /* play.png */; };
 		3A9732E91F4D73F900CA631A /* play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9732DF1F4D73F900CA631A /* play@2x.png */; };
-		3A9732EB1F4D753400CA631A /* 4k.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3A9732EA1F4D753400CA631A /* 4k.mp4 */; };
 		75B053160025B703CAC63791 /* libPods-ZBPlayer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E031A25A077886026B8CC01F /* libPods-ZBPlayer.a */; };
 /* End PBXBuildFile section */
 
@@ -121,7 +120,6 @@
 		3A9732DD1F4D73F900CA631A /* pause@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pause@2x.png"; sourceTree = "<group>"; };
 		3A9732DE1F4D73F900CA631A /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
 		3A9732DF1F4D73F900CA631A /* play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play@2x.png"; sourceTree = "<group>"; };
-		3A9732EA1F4D753400CA631A /* 4k.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 4k.mp4; sourceTree = "<group>"; };
 		8980EF3042AD75B28356970E /* Pods-ZBPlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZBPlayer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZBPlayer/Pods-ZBPlayer.debug.xcconfig"; sourceTree = "<group>"; };
 		E031A25A077886026B8CC01F /* libPods-ZBPlayer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZBPlayer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -233,7 +231,6 @@
 				3A03094E1F4EE67900465876 /* dowLoading */,
 				3A03094D1F4EE66700465876 /* downLoaded */,
 				3A2911A81F4C034C0092C693 /* Main.storyboard */,
-				3A9732EA1F4D753400CA631A /* 4k.mp4 */,
 				3A2911AB1F4C034C0092C693 /* Assets.xcassets */,
 				3A2911AD1F4C034C0092C693 /* LaunchScreen.storyboard */,
 				3A2911B01F4C034C0092C693 /* Info.plist */,
@@ -393,7 +390,6 @@
 				3A9732E61F4D73F900CA631A /* pause.png in Resources */,
 				3A9732E51F4D73F900CA631A /* knob.png in Resources */,
 				3A9732E81F4D73F900CA631A /* play.png in Resources */,
-				3A9732EB1F4D753400CA631A /* 4k.mp4 in Resources */,
 				3A9732E71F4D73F900CA631A /* pause@2x.png in Resources */,
 				3A9732C51F4D735200CA631A /* Info.plist in Resources */,
 				3A0309471F4EE4D600465876 /* DownLoadingController.xib in Resources */,
