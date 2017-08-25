@@ -7,12 +7,23 @@
 //
 
 #import "MoviewCell.h"
+#import "DownLoadingController.h"
 
 @implementation MoviewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    
+    
+    DownLoadingController *vc =[[DownLoadingController alloc]init];
+    vc.block = ^(NSString *progress) {
+        self.progressLabel.text = progress;
+        
+    };
+    
+   
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

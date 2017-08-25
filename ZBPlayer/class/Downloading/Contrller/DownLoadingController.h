@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface DownLoadingController : UIViewController
-
+@property(strong,nonatomic) void(^block)(NSString * progress);
 @end

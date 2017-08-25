@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface MoviewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *progressLabel;
+@property (weak, nonatomic) IBOutlet UILabel *movieName;
+
+
 
 @end

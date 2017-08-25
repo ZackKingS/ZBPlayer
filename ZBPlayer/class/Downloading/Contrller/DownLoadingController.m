@@ -25,7 +25,7 @@
 @property (nonatomic, strong) NSURLSessionDownloadTask *downloadTask;
 @property (nonatomic, strong) NSData *resumData;
 @property (nonatomic, strong) NSURLSession *session;
-
+@property (nonatomic, assign) double progress;
 
 @end
 NSString * const MYID = @"MovieCell";
@@ -151,6 +151,24 @@ NSString * const MYID = @"MovieCell";
     
     
     self.navigationItem.title = [NSString stringWithFormat:@"%.2f%%",1.0 * totalBytesWritten/totalBytesExpectedToWrite * 100];
+
+    
+    
+    self.progress = 1.0 * totalBytesWritten/totalBytesExpectedToWrite * 100;
+    
+    
+//    if (_block) {
+//        _block([NSString stringWithFormat:@"%.2f%%",1.0 * totalBytesWritten/totalBytesExpectedToWrite * 100]);
+//    }
+    
+
+    
+    
+    MoviewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:MYID];
+    cell.progressLabel.text =[NSString stringWithFormat:@"%.2f%%",1.0 * totalBytesWritten/totalBytesExpectedToWrite * 100];
+    
+    
+    
     
 //    _progressView.progress = 1.0 * totalBytesWritten/totalBytesExpectedToWrite;
     
@@ -186,7 +204,7 @@ NSString * const MYID = @"MovieCell";
     [[NSUserDefaults standardUserDefaults] setObject:fullPath forKey:key];
     
     
-    self.navigationItem.title = @"下载中";
+    self.navigationItem.title = @"已下载";
  
 }
 
@@ -208,9 +226,14 @@ NSString * const MYID = @"MovieCell";
 {
     MoviewCell *cell = [tableView dequeueReusableCellWithIdentifier:MYID forIndexPath:indexPath];
     
-    cell.textLabel.text = [self.movieArr[indexPath.row] lastPathComponent];
-    cell.detailTextLabel.text = @"70%";
+//    cell.textLabel.text = [self.movieArr[indexPath.row] lastPathComponent];
+//    cell.detailTextLabel.text = [NSString stringWithFormat:@"%.2f%%",self.progress];;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.progressLabel.text = [NSString stringWithFormat:@"%.2f%%",self.progress];
+    cell.movieName.text = [self.movieArr[indexPath.row] lastPathComponent];
+
+    
+    
     return cell;
 
 }
@@ -234,53 +257,11 @@ NSString * const MYID = @"MovieCell";
     
  
     
-//    [self deleteAtIndexPath:indexPath.row];
     
     [ZBTool deleteAtIndexPath:indexPath.row];
     
 }
 
-//-(void)deleteAtIndexPath:(NSInteger)index{
-//    
-//   NSMutableArray *mutableArr =    [self read];
-//    [mutableArr removeObjectAtIndex:index];
-//       [self saveWithMutableArray:mutableArr];
-//    
-//    
-//}
-
-//-(void)addMov:(NSString *)str{
-//    
-//NSMutableArray *muArr =    [self read];
-//    
-//    [muArr addObject:str];
-//    
-//    [self saveWithMutableArray:muArr];
-//}
-//
-//
-//-(NSMutableArray*) read{
-//    
-//    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-//    NSString *strPath = [documentsPath stringByAppendingPathComponent:@"text.txt"];
-//    NSString *newStr = [NSString stringWithContentsOfFile:strPath encoding:NSUTF8StringEncoding error:nil];
-//    NSArray  *array = [newStr componentsSeparatedByString:@" "];//分隔符逗号
-//    
-//    NSMutableArray *ac = [NSMutableArray arrayWithArray:array];
-//    
-//    return ac;
-//}
-//
-//
-//-(void)saveWithMutableArray:(NSMutableArray*)mutableArray {
-//    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-//    NSString *strPath = [documentsPath stringByAppendingPathComponent:@"text.txt"];
-//    NSString *string = [mutableArray componentsJoinedByString:@" "];
-//    [string writeToFile:strPath atomically:YES encoding:NSUTF8StringEncoding error:nil];
-//    NSString *newStrr = [NSString stringWithContentsOfFile:strPath encoding:NSUTF8StringEncoding error:nil];
-//    NSLog(@"%@", newStrr);
-//    
-//}
 
 
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
