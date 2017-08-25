@@ -32,6 +32,26 @@ NSString * const MYID = @"MovieCell";
 
 @implementation DownLoadingController
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    
+    [super viewWillAppear:animated];
+    
+    if ([[UIDevice currentDevice] respondsToSelector:@selector(setOrientation:)]) {
+        SEL selector = NSSelectorFromString(@"setOrientation:");
+        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[UIDevice instanceMethodSignatureForSelector:selector]];
+        [invocation setSelector:selector];
+        [invocation setTarget:[UIDevice currentDevice]];
+        int val = UIInterfaceOrientationPortrait;//这里可以改变旋转的方向
+        [invocation setArgument:&val atIndex:2];
+        [invocation invoke];
+    }
+    
+    
+    
+}
+
+
 - (NSMutableArray *)movieArr
 {
     
@@ -156,11 +176,6 @@ NSString * const MYID = @"MovieCell";
     
     self.progress = 1.0 * totalBytesWritten/totalBytesExpectedToWrite * 100;
     
-    
-//    if (_block) {
-//        _block([NSString stringWithFormat:@"%.2f%%",1.0 * totalBytesWritten/totalBytesExpectedToWrite * 100]);
-//    }
-    
 
     
     
@@ -169,11 +184,6 @@ NSString * const MYID = @"MovieCell";
     
     
     
-    
-//    _progressView.progress = 1.0 * totalBytesWritten/totalBytesExpectedToWrite;
-    
-    
-//    _progressTitle.text = [NSString stringWithFormat:@"%.2f",1.0 * totalBytesWritten/totalBytesExpectedToWrite *100];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -243,8 +253,11 @@ NSString * const MYID = @"MovieCell";
     
     PlayMoviewController *player= [[PlayMoviewController alloc]init];
     player.hidesBottomBarWhenPushed = YES;
+    player.moiveName = [self.movieArr[indexPath.row] lastPathComponent];
+    
+    
     player.key = [NSString stringWithFormat:@"%d",indexPath.row+1];
-    [self.navigationController pushViewController:player animated:YES];
+    [self.navigationController pushViewController:player animated:NO];
 }
 
 

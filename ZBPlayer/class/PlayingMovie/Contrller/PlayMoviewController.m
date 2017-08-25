@@ -20,27 +20,47 @@
 
 @implementation PlayMoviewController
 
+
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    
+    [super viewWillAppear:animated];
+    
+    if ([[UIDevice currentDevice] respondsToSelector:@selector(setOrientation:)]) {
+        SEL selector = NSSelectorFromString(@"setOrientation:");
+        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[UIDevice instanceMethodSignatureForSelector:selector]];
+        [invocation setSelector:selector];
+        [invocation setTarget:[UIDevice currentDevice]];
+        int val = UIInterfaceOrientationLandscapeRight;//这里可以改变旋转的方向
+        [invocation setArgument:&val atIndex:2];
+        [invocation invoke];
+    }
+    
+    
+    
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
 
-    
-    //1.
-//    NSURL *URL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"4k" ofType:@"mp4"]];
-    
     
     NSString *url= [[NSUserDefaults standardUserDefaults] objectForKey:self.key];
-
-    
-    
     self.player = [[SBPlayer alloc]initWithUrl:[NSURL URLWithString:url]];
+  
+      __weak typeof(self) weakSelf = self;
     
+    self.player.block = ^{
+      
+        [ weakSelf.navigationController popViewControllerAnimated:NO];
+        
+    };
     
-
     
     //设置标题
-    [self.player setTitle:@"这是一个标题"];
+    [self.player setTitle:self.moiveName];
     //设置播放器背景颜色
     self.player.backgroundColor = [UIColor blackColor];
     //设置播放器填充模式 默认SBLayerVideoGravityResizeAspectFill，可以不添加此语句

@@ -20,6 +20,13 @@
 @property (nonatomic,strong) NSArray *oldConstriants;
 //添加标题
 @property (nonatomic,strong) UILabel *titleLabel;
+
+//添加返回按钮
+@property (nonatomic,strong) UIButton *backBth;
+
+
+
+
 //加载动画
 @property (nonatomic,strong) UIActivityIndicatorView *activityIndeView;
 @end
@@ -322,6 +329,13 @@ static NSInteger count = 0;
     [self.activityIndeView startAnimating];
     //添加标题
     [self addTitle];
+    
+    //添加返回
+    [self addBack];
+    
+    
+    
+    
     //添加点击事件
     [self addGestureEvent];
     //添加播放和暂停按钮
@@ -355,6 +369,34 @@ static NSInteger count = 0;
         make.width.mas_equalTo(self.mas_width);
     }];
 }
+
+-(void)addBack
+{
+    UIButton *bth = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 100, 60)];
+    
+    [bth setTitle:@"返回" forState:UIControlStateNormal];
+    [bth addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    self.backBth =bth;
+    
+    [self addSubview:self.backBth];
+    [self.backBth mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.mas_left).offset(-200);
+        make.top.mas_equalTo(self).offset(20);
+        make.width.mas_equalTo(self.mas_width);
+    }];
+    
+}
+
+-(void)back{
+    
+    NSLog(@"123");
+    
+    if (_block) {
+        _block();
+    }
+}
+
+
 //添加点击事件
 -(void)addGestureEvent{
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTapAction:)];
@@ -369,7 +411,11 @@ static NSInteger count = 0;
 -(void)addPauseAndPlayBtn{
     [self addSubview:self.pauseOrPlayView];
     [self.pauseOrPlayView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(self);
+//        make.edges.mas_equalTo(self);
+        
+        make.left.right.bottom.mas_equalTo(self);
+        make.top.mas_equalTo(self.mas_top).offset(60);
+        
     }];
 }
 //添加控制视图
@@ -426,6 +472,7 @@ static NSInteger count = 0;
     self.controlView.hidden = isHide;
     self.pauseOrPlayView.hidden = isHide;
     self.titleLabel.hidden = isHide;
+    self.backBth.hidden = isHide;
 }
 //MARK: SBPauseOrPlayViewDeleagate
 -(void)pauseOrPlayView:(SBPauseOrPlayView *)pauseOrPlayView withState:(BOOL)state{

@@ -151,13 +151,13 @@
 		3A0309611F4FBF9E00465876 /* class */ = {
 			isa = PBXGroup;
 			children = (
+				3A0309B31F4FBF9E00465876 /* PlayingMovie */,
 				3A0309621F4FBF9E00465876 /* AddingMovie */,
 				3A0309691F4FBF9E00465876 /* Downloaded */,
 				3A0309701F4FBF9E00465876 /* Downloading */,
 				3A03097A1F4FBF9E00465876 /* Lib */,
 				3A0309A61F4FBF9E00465876 /* Main */,
 				3A0309AE1F4FBF9E00465876 /* Other */,
-				3A0309B31F4FBF9E00465876 /* PlayingMovie */,
 			);
 			path = class;
 			sourceTree = "<group>";

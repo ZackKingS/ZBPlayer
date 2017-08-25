@@ -53,6 +53,10 @@ typedef NS_ENUM(NSInteger,SBPlayerStatus){
 @property (nonatomic,assign,readonly) BOOL isFullScreen;
 //设置标题
 @property (nonatomic,copy) NSString *title;
+
+@property(nonatomic,strong)void(^block)();
+
+
 //与url初始化
 -(instancetype)initWithUrl:(NSURL *)url;
 //将播放url放入资产中初始化播放器
