@@ -43,6 +43,7 @@
 		3A0309DC1F4FBF9E00465876 /* PlayMoviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0309B61F4FBF9E00465876 /* PlayMoviewController.m */; };
 		3A0309DD1F4FBF9E00465876 /* PlayMoviewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A0309B71F4FBF9E00465876 /* PlayMoviewController.xib */; };
 		3A0309DF1F4FC01300465876 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A0309DE1F4FC01300465876 /* Info.plist */; };
+		3A0309E21F50023C00465876 /* ZBTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0309E11F50023C00465876 /* ZBTool.m */; };
 		3A2911A71F4C034C0092C693 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2911A61F4C034C0092C693 /* ViewController.m */; };
 		3A2911AA1F4C034C0092C693 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A2911A81F4C034C0092C693 /* Main.storyboard */; };
 		3A2911AC1F4C034C0092C693 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A2911AB1F4C034C0092C693 /* Assets.xcassets */; };
@@ -115,6 +116,8 @@
 		3A0309B61F4FBF9E00465876 /* PlayMoviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayMoviewController.m; sourceTree = "<group>"; };
 		3A0309B71F4FBF9E00465876 /* PlayMoviewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayMoviewController.xib; sourceTree = "<group>"; };
 		3A0309DE1F4FC01300465876 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3A0309E01F50023C00465876 /* ZBTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBTool.h; sourceTree = "<group>"; };
+		3A0309E11F50023C00465876 /* ZBTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZBTool.m; sourceTree = "<group>"; };
 		3A29119C1F4C034C0092C693 /* ZBPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZBPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A2911A51F4C034C0092C693 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		3A2911A61F4C034C0092C693 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
@@ -232,6 +235,7 @@
 			children = (
 				3A0309711F4FBF9E00465876 /* Contrller */,
 				3A0309751F4FBF9E00465876 /* Model */,
+				3A0309E31F50024100465876 /* ZBTool */,
 				3A0309761F4FBF9E00465876 /* View */,
 			);
 			path = Downloading;
@@ -411,6 +415,16 @@
 			isa = PBXGroup;
 			children = (
 			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3A0309E31F50024100465876 /* ZBTool */ = {
+			isa = PBXGroup;
+			children = (
+				3A0309E01F50023C00465876 /* ZBTool.h */,
+				3A0309E11F50023C00465876 /* ZBTool.m */,
+			);
+			name = ZBTool;
 			path = View;
 			sourceTree = "<group>";
 		};
@@ -605,6 +619,7 @@
 				3A0309C81F4FBF9E00465876 /* MASViewConstraint.m in Sources */,
 				3A0309BE1F4FBF9E00465876 /* DownLoadingController.m in Sources */,
 				3A0309DC1F4FBF9E00465876 /* PlayMoviewController.m in Sources */,
+				3A0309E21F50023C00465876 /* ZBTool.m in Sources */,
 				3A2911A71F4C034C0092C693 /* ViewController.m in Sources */,
 				3A0309BC1F4FBF9E00465876 /* DownLoadedController.m in Sources */,
 				3A0309CB1F4FBF9E00465876 /* View+MASAdditions.m in Sources */,

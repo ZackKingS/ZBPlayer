@@ -14,7 +14,7 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import "SBPlayer.h"
 
-
+#import "ZBTool.h"
 
 
 @interface DownLoadingController ()<UITableViewDelegate,UITableViewDataSource,NSURLSessionDownloadDelegate>
@@ -106,18 +106,9 @@ NSString * const MYID = @"MovieCell";
         [self.tableView reloadData];
         
         
+        [ZBTool addMov:str];
         
-        [self addMov:str];
-        
-//        NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-//        
-//        
-//  
-//        NSString *strPath = [documentsPath stringByAppendingPathComponent:@"text.txt"];
-//        NSString *string = [self.movieArr componentsJoinedByString:@" "];
-//        [string writeToFile:strPath atomically:YES encoding:NSUTF8StringEncoding error:nil];
-//        NSString *newStr = [NSString stringWithContentsOfFile:strPath encoding:NSUTF8StringEncoding error:nil];
-//        NSLog(@"%@", newStr);
+
         
         
         [self startBtnClick:str];  //下载
@@ -159,6 +150,8 @@ NSString * const MYID = @"MovieCell";
     NSLog(@"%f",1.0 * totalBytesWritten/totalBytesExpectedToWrite);
     
     
+    self.navigationItem.title = [NSString stringWithFormat:@"%.2f%%",1.0 * totalBytesWritten/totalBytesExpectedToWrite * 100];
+    
 //    _progressView.progress = 1.0 * totalBytesWritten/totalBytesExpectedToWrite;
     
     
@@ -191,6 +184,9 @@ NSString * const MYID = @"MovieCell";
      NSLog(@"%@",fullPath);
     NSString *key =[NSString stringWithFormat:@"%d",self.movieArr.count];
     [[NSUserDefaults standardUserDefaults] setObject:fullPath forKey:key];
+    
+    
+    self.navigationItem.title = @"下载中";
  
 }
 
@@ -236,60 +232,55 @@ NSString * const MYID = @"MovieCell";
     [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
     
     
+ 
     
-
+//    [self deleteAtIndexPath:indexPath.row];
     
-//  NSMutableArray *ac =  [self read];
-//     [ac removeObjectAtIndex:indexPath.row];
-//    [self saveWithMutableArray:ac];
-    
-    
-    [self deleteAtIndexPath:indexPath.row];
-    
+    [ZBTool deleteAtIndexPath:indexPath.row];
     
 }
 
--(void)deleteAtIndexPath:(NSInteger)index{
-    
-   NSMutableArray *mutableArr =    [self read];
-    [mutableArr removeObjectAtIndex:index];
-       [self saveWithMutableArray:mutableArr];
-    
-    
-}
+//-(void)deleteAtIndexPath:(NSInteger)index{
+//    
+//   NSMutableArray *mutableArr =    [self read];
+//    [mutableArr removeObjectAtIndex:index];
+//       [self saveWithMutableArray:mutableArr];
+//    
+//    
+//}
 
--(void)addMov:(NSString *)str{
-    
-NSMutableArray *muArr =    [self read];
-    
-    [muArr addObject:str];
-    
-    [self saveWithMutableArray:muArr];
-}
-
-
--(NSMutableArray*) read{
-    
-    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *strPath = [documentsPath stringByAppendingPathComponent:@"text.txt"];
-    NSString *newStr = [NSString stringWithContentsOfFile:strPath encoding:NSUTF8StringEncoding error:nil];
-    NSArray  *array = [newStr componentsSeparatedByString:@" "];//分隔符逗号
-    
-    NSMutableArray *ac = [NSMutableArray arrayWithArray:array];
-    
-    return ac;
-}
-
-
--(void)saveWithMutableArray:(NSMutableArray*)mutableArray {
-    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *strPath = [documentsPath stringByAppendingPathComponent:@"text.txt"];
-    NSString *string = [mutableArray componentsJoinedByString:@" "];
-    [string writeToFile:strPath atomically:YES encoding:NSUTF8StringEncoding error:nil];
-    NSString *newStrr = [NSString stringWithContentsOfFile:strPath encoding:NSUTF8StringEncoding error:nil];
-    NSLog(@"%@", newStrr);
-    
-}
+//-(void)addMov:(NSString *)str{
+//    
+//NSMutableArray *muArr =    [self read];
+//    
+//    [muArr addObject:str];
+//    
+//    [self saveWithMutableArray:muArr];
+//}
+//
+//
+//-(NSMutableArray*) read{
+//    
+//    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+//    NSString *strPath = [documentsPath stringByAppendingPathComponent:@"text.txt"];
+//    NSString *newStr = [NSString stringWithContentsOfFile:strPath encoding:NSUTF8StringEncoding error:nil];
+//    NSArray  *array = [newStr componentsSeparatedByString:@" "];//分隔符逗号
+//    
+//    NSMutableArray *ac = [NSMutableArray arrayWithArray:array];
+//    
+//    return ac;
+//}
+//
+//
+//-(void)saveWithMutableArray:(NSMutableArray*)mutableArray {
+//    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+//    NSString *strPath = [documentsPath stringByAppendingPathComponent:@"text.txt"];
+//    NSString *string = [mutableArray componentsJoinedByString:@" "];
+//    [string writeToFile:strPath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+//    NSString *newStrr = [NSString stringWithContentsOfFile:strPath encoding:NSUTF8StringEncoding error:nil];
+//    NSLog(@"%@", newStrr);
+//    
+//}
 
 
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
