@@ -16,10 +16,6 @@
 
 
 
-#define kScreenWidth [UIScreen mainScreen].bounds.size.width
-#define kScreenHeight [UIScreen mainScreen].bounds.size.height
-
-
 
 @interface DownLoadingController ()<UITableViewDelegate,UITableViewDataSource,NSURLSessionDownloadDelegate>
 
@@ -40,59 +36,36 @@ NSString * const MYID = @"MovieCell";
 {
     
     if (!_movieArr) {
-        
-   
-        
         NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-        
-
         NSString *strPath = [documentsPath stringByAppendingPathComponent:@"text.txt"];
-        
         BOOL exist =   [[ [NSFileManager alloc]init]  fileExistsAtPath:strPath];
-        
-        
-       
-        
         if (exist) {  //已经存在
             
             NSString *newStr = [NSString stringWithContentsOfFile:strPath encoding:NSUTF8StringEncoding error:nil];
             NSArray  *array = [newStr componentsSeparatedByString:@" "];//分隔符逗号
             _movieArr = [NSMutableArray  arrayWithArray:array];
-            
-            
+            for (NSString *str in _movieArr) {
+                if ([str isEqualToString:@""]) {
+                    [_movieArr removeObject:str];
+                    break;
+                }
+            }
         }else{
             
             // 2.创建要存储的内容：字符串
             _movieArr = [NSMutableArray array];
-            
-            NSString *string = [_movieArr componentsJoinedByString:@" "];
-            
+            NSString *string = [_movieArr componentsJoinedByString:@""];
             [string writeToFile:strPath atomically:YES encoding:NSUTF8StringEncoding error:nil];
-            NSString *newStr = [NSString stringWithContentsOfFile:strPath encoding:NSUTF8StringEncoding error:nil];
-            NSLog(@"%@", newStr);
-            
-            
-            
+          
         }
-        
-        
-        
     }
     return _movieArr;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    
-  
-    
     [self setupTableView];
-    
     [self setupNavigationItem];
-    
-    
-    
 }
 
 
@@ -100,15 +73,12 @@ NSString * const MYID = @"MovieCell";
 {
     self.tableView.delegate = self;
     self.tableView.dataSource =self;
-    
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([MoviewCell class]) bundle:nil] forCellReuseIdentifier:MYID];
-    
 }
 
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     return 80;
 }
 
@@ -116,9 +86,7 @@ NSString * const MYID = @"MovieCell";
 {
     
      self.navigationItem.title = @"下载中";
-    
     UIBarButtonItem *addItem = [[UIBarButtonItem  alloc]initWithTitle:@"添加" style:UIBarButtonItemStylePlain target:self action:@selector(addMoview)];
-    
     self.navigationItem.rightBarButtonItem = addItem;
     
 }
@@ -129,25 +97,27 @@ NSString * const MYID = @"MovieCell";
     
     adding.block = ^(NSString *str) {
       
+         NSLog(@"%@",self.movieArr);
+        
         [self.movieArr addObject:str];
+        
+        NSLog(@"%@",self.movieArr);
         
         [self.tableView reloadData];
         
         
         
-        NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        [self addMov:str];
         
-        
-  
-        NSString *strPath = [documentsPath stringByAppendingPathComponent:@"text.txt"];
-        NSString *string = [self.movieArr componentsJoinedByString:@" "];
-        [string writeToFile:strPath atomically:YES encoding:NSUTF8StringEncoding error:nil];
-        NSString *newStr = [NSString stringWithContentsOfFile:strPath encoding:NSUTF8StringEncoding error:nil];
-        NSLog(@"%@", newStr);
-            
-            
-
-        
+//        NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+//        
+//        
+//  
+//        NSString *strPath = [documentsPath stringByAppendingPathComponent:@"text.txt"];
+//        NSString *string = [self.movieArr componentsJoinedByString:@" "];
+//        [string writeToFile:strPath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+//        NSString *newStr = [NSString stringWithContentsOfFile:strPath encoding:NSUTF8StringEncoding error:nil];
+//        NSLog(@"%@", newStr);
         
         
         [self startBtnClick:str];  //下载
@@ -207,34 +177,21 @@ NSString * const MYID = @"MovieCell";
 {
     NSLog(@"%@",location);
     
-    
-    
-    
-    
+ 
     
     //1 拼接文件全路径
     NSString *fullPath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:downloadTask.response.suggestedFilename];
     
 
-    
     //2 剪切文件
     [[NSFileManager defaultManager]moveItemAtURL:location toURL:[NSURL fileURLWithPath:fullPath] error:nil];
-    
-    
-    NSLog(@"下载完成");
-   
-    
-    
+
     fullPath = [@"file://" stringByAppendingString:fullPath];
 
      NSLog(@"%@",fullPath);
-    
     NSString *key =[NSString stringWithFormat:@"%d",self.movieArr.count];
     [[NSUserDefaults standardUserDefaults] setObject:fullPath forKey:key];
-    
-    
-    
-    
+ 
 }
 
 
@@ -242,14 +199,12 @@ NSString * const MYID = @"MovieCell";
 -(void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
 {
     NSLog(@"didCompleteWithError");
-    
     NSLog(@"%@",error);
 }
 
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    
     return self.movieArr.count;
 }
 
@@ -257,34 +212,89 @@ NSString * const MYID = @"MovieCell";
 {
     MoviewCell *cell = [tableView dequeueReusableCellWithIdentifier:MYID forIndexPath:indexPath];
     
-    cell.textLabel.text = self.movieArr[indexPath.row];
+    cell.textLabel.text = [self.movieArr[indexPath.row] lastPathComponent];
     cell.detailTextLabel.text = @"70%";
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-
     return cell;
-    
-    
-    
+
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
     PlayMoviewController *player= [[PlayMoviewController alloc]init];
-    
     player.hidesBottomBarWhenPushed = YES;
-    
-    NSLog(@"%@",self.movieArr);
-    
-//    player.url =   [NSURL URLWithString:self.movieArr[indexPath.row]]  ;
-    
     player.key = [NSString stringWithFormat:@"%d",indexPath.row+1];
-
     [self.navigationController pushViewController:player animated:YES];
+}
+
+
+- (void)tableView:(UITableView*)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath*)indexPath
+{
+    NSLog(@"commitEditingStyle--");
+    [self.movieArr removeObjectAtIndex:indexPath.row];
+    [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
+    
+    
+    
+
+    
+//  NSMutableArray *ac =  [self read];
+//     [ac removeObjectAtIndex:indexPath.row];
+//    [self saveWithMutableArray:ac];
+    
+    
+    [self deleteAtIndexPath:indexPath.row];
     
     
 }
 
+-(void)deleteAtIndexPath:(NSInteger)index{
+    
+   NSMutableArray *mutableArr =    [self read];
+    [mutableArr removeObjectAtIndex:index];
+       [self saveWithMutableArray:mutableArr];
+    
+    
+}
+
+-(void)addMov:(NSString *)str{
+    
+NSMutableArray *muArr =    [self read];
+    
+    [muArr addObject:str];
+    
+    [self saveWithMutableArray:muArr];
+}
+
+
+-(NSMutableArray*) read{
+    
+    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *strPath = [documentsPath stringByAppendingPathComponent:@"text.txt"];
+    NSString *newStr = [NSString stringWithContentsOfFile:strPath encoding:NSUTF8StringEncoding error:nil];
+    NSArray  *array = [newStr componentsSeparatedByString:@" "];//分隔符逗号
+    
+    NSMutableArray *ac = [NSMutableArray arrayWithArray:array];
+    
+    return ac;
+}
+
+
+-(void)saveWithMutableArray:(NSMutableArray*)mutableArray {
+    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *strPath = [documentsPath stringByAppendingPathComponent:@"text.txt"];
+    NSString *string = [mutableArray componentsJoinedByString:@" "];
+    [string writeToFile:strPath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+    NSString *newStrr = [NSString stringWithContentsOfFile:strPath encoding:NSUTF8StringEncoding error:nil];
+    NSLog(@"%@", newStrr);
+    
+}
+
+
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return @"删除";
+}
 
 @end
