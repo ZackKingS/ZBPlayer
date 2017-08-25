@@ -117,7 +117,7 @@ NSString * const MYID = @"MovieCell";
     
      self.navigationItem.title = @"下载中";
     
-    UIBarButtonItem *addItem = [[UIBarButtonItem  alloc]initWithTitle:@"+" style:UIBarButtonItemStylePlain target:self action:@selector(addMoview)];
+    UIBarButtonItem *addItem = [[UIBarButtonItem  alloc]initWithTitle:@"添加" style:UIBarButtonItemStylePlain target:self action:@selector(addMoview)];
     
     self.navigationItem.rightBarButtonItem = addItem;
     
@@ -215,23 +215,19 @@ NSString * const MYID = @"MovieCell";
     //1 拼接文件全路径
     NSString *fullPath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:downloadTask.response.suggestedFilename];
     
-    
-//    self.videouri = fullPath;
-    
+
     
     //2 剪切文件
     [[NSFileManager defaultManager]moveItemAtURL:location toURL:[NSURL fileURLWithPath:fullPath] error:nil];
     
     
     NSLog(@"下载完成");
-    NSLog(@"%@",fullPath);
-    
-    
    
-    fullPath = [@"file://" stringByAppendingString:fullPath];
-//    NSURL * urllll = [NSURL URLWithString:fullPath];
-
     
+    
+    fullPath = [@"file://" stringByAppendingString:fullPath];
+
+     NSLog(@"%@",fullPath);
     
     NSString *key =[NSString stringWithFormat:@"%d",self.movieArr.count];
     [[NSUserDefaults standardUserDefaults] setObject:fullPath forKey:key];

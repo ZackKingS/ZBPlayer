@@ -54,6 +54,8 @@
         make.height.mas_equalTo(@250);
     }];
     
+    [self.player play];
+    
 }
 
 - (void)didReceiveMemoryWarning {
