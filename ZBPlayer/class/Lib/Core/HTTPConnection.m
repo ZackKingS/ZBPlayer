@@ -2061,6 +2061,12 @@ static NSMutableArray *recentNonces;
             
             NSLog(@"-------contentLength------%@",contentLength);
             
+            
+            [[NSUserDefaults standardUserDefaults ] setObject:contentLength forKey:@"contentLength"];
+            
+            double total = [contentLength floatValue]/1024/1024;
+            
+             NSLog(@"------============total==-contentLength--================----%f",total);
 			
 			// Content-Length MUST be present for upload methods (such as POST or PUT)
 			// and MUST NOT be present for other methods.

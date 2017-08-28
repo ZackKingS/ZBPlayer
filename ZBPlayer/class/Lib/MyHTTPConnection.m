@@ -187,6 +187,12 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_VERBOSE; // | HTTP_LOG_FLAG_TRACE
 	// here we just write the output from parser to the file.
 	if( storeFile ) {
 		[storeFile writeData:data];
+        
+        
+     
+        
+        NSLog(@"?????????------%lu",(unsigned long)data.length/1024/1024);
+        
         NSLog(@"-------processContent:(NSData*) data WithHeader--------");
     }else{
         
@@ -202,7 +208,32 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_VERBOSE; // | HTTP_LOG_FLAG_TRACE
     }
     
     NSLog(@"-------22222--------");
-
+  
+    
+    MultipartMessageHeaderField* disposition = [header.fields objectForKey:@"Content-Disposition"];
+    NSString* filename = [[disposition.params objectForKey:@"filename"] lastPathComponent];
+    
+    NSString *uploadDirPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    
+    NSString* filePath = [uploadDirPath stringByAppendingPathComponent: filename];
+    
+    // attributesOfItemAtPath:只能获取文件尺寸,获取文件夹不对,
+    NSDictionary *attr = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:nil];
+    
+    // 获取文件尺寸
+    NSInteger fileSize = [attr fileSize];
+    
+    
+    NSString *contentLength = [[NSUserDefaults standardUserDefaults] objectForKey:@"contentLength"];
+    
+    NSInteger  tatal = contentLength.integerValue;
+//    NSLog(@"%ld",(long)contentLength.integerValue);
+    
+    
+    
+//    double cur =  [fileSize double]
+    
+    NSLog(@"-------fileSize--------%.2f%%",(double)fileSize/(double)tatal*100);
     
 }
 
