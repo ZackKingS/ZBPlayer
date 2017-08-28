@@ -15,9 +15,14 @@
 #import "SBPlayer.h"
 
 #import "ZBTool.h"
+#import "HTTPServer.h"
+#import "MyHTTPConnection.h"
+#import "ZBTool.h"
 
+@interface DownLoadingController ()<UITableViewDelegate,UITableViewDataSource,NSURLSessionDownloadDelegate>{
+    HTTPServer * httpServer;
+}
 
-@interface DownLoadingController ()<UITableViewDelegate,UITableViewDataSource,NSURLSessionDownloadDelegate>
 
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -49,43 +54,95 @@ NSString * const MYID = @"MovieCell";
     
     
     
+     NSString *uploadDirPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
+    
+    NSLog(@"%@",uploadDirPath);
+    
+    NSFileManager  *maneger = [[NSFileManager alloc]init];
+    
+    
+     NSArray *subPaths = [maneger contentsOfDirectoryAtPath:uploadDirPath error:nil];
+ 
+    NSLog(@"%@",subPaths);
 }
 
 
 - (NSMutableArray *)movieArr
 {
     
-    if (!_movieArr) {
-        NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-        NSString *strPath = [documentsPath stringByAppendingPathComponent:@"text.txt"];
-        BOOL exist =   [[ [NSFileManager alloc]init]  fileExistsAtPath:strPath];
-        if (exist) {  //已经存在
-            
-            NSString *newStr = [NSString stringWithContentsOfFile:strPath encoding:NSUTF8StringEncoding error:nil];
-            NSArray  *array = [newStr componentsSeparatedByString:@" "];//分隔符逗号
-            _movieArr = [NSMutableArray  arrayWithArray:array];
-            for (NSString *str in _movieArr) {
-                if ([str isEqualToString:@""]) {
-                    [_movieArr removeObject:str];
-                    break;
-                }
-            }
-        }else{
-            
-            // 2.创建要存储的内容：字符串
-            _movieArr = [NSMutableArray array];
-            NSString *string = [_movieArr componentsJoinedByString:@""];
-            [string writeToFile:strPath atomically:YES encoding:NSUTF8StringEncoding error:nil];
-          
-        }
-    }
+//    if (!_movieArr) {
+//        NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+//        NSString *strPath = [documentsPath stringByAppendingPathComponent:@"text.txt"];
+//        BOOL exist =   [[ [NSFileManager alloc]init]  fileExistsAtPath:strPath];
+//        if (exist) {  //已经存在
+//            
+//            NSString *newStr = [NSString stringWithContentsOfFile:strPath encoding:NSUTF8StringEncoding error:nil];
+//            NSArray  *array = [newStr componentsSeparatedByString:@" "];//分隔符逗号
+//            _movieArr = [NSMutableArray  arrayWithArray:array];
+//            for (NSString *str in _movieArr) {
+//                if ([str isEqualToString:@""]) {
+//                    [_movieArr removeObject:str];
+//                    break;
+//                }
+//            }
+//        }else{
+//            
+//            // 2.创建要存储的内容：字符串
+//            _movieArr = [NSMutableArray array];
+//            NSString *string = [_movieArr componentsJoinedByString:@""];
+//            [string writeToFile:strPath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+//          
+//        }
+        
+        
+        //Method 2
+        NSString *uploadDirPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+        NSFileManager  *maneger = [[NSFileManager alloc]init];
+        NSArray *subPaths = [maneger contentsOfDirectoryAtPath:uploadDirPath error:nil];
+        _movieArr = [NSMutableArray array];
+        
+        _movieArr = [NSMutableArray arrayWithArray:subPaths];
+        
+//    }
     return _movieArr;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+     [self setupHttp];
     [self setupTableView];
     [self setupNavigationItem];
+    [self addobsever];
+   
+}
+
+-(void)addobsever
+{
+    
+    [[NSNotificationCenter defaultCenter ] addObserver:self selector:@selector(reloading) name:@"ok" object:nil];
+    
+}
+
+-(void)reloading{
+    
+    [self.tableView reloadData];
+}
+
+
+-(void)setupHttp{
+    httpServer = [[HTTPServer alloc] init];
+    
+    [httpServer setType:@"_http._tcp."];
+    
+    // webPath是server搜寻HTML等文件的路径
+    
+    NSString *webPath = [[NSBundle mainBundle] resourcePath];
+    
+    [httpServer setDocumentRoot:webPath];
+    
+    [httpServer setConnectionClass:[MyHTTPConnection class]];
+    
+    
 }
 
 
@@ -105,39 +162,62 @@ NSString * const MYID = @"MovieCell";
 -(void)setupNavigationItem
 {
     
-     self.navigationItem.title = @"下载中";
-    UIBarButtonItem *addItem = [[UIBarButtonItem  alloc]initWithTitle:@"添加" style:UIBarButtonItemStylePlain target:self action:@selector(addMoview)];
+//     self.navigationItem.title = @"下载中";
+//    UIBarButtonItem *addItem = [[UIBarButtonItem  alloc]initWithTitle:@"添加" style:UIBarButtonItemStylePlain target:self action:@selector(addMoview)];
+//    self.navigationItem.rightBarButtonItem = addItem;
+
+    UIBarButtonItem *addItem = [[UIBarButtonItem  alloc]initWithTitle:@"刷新" style:UIBarButtonItemStylePlain target:self action:@selector(addMoview)];
     self.navigationItem.rightBarButtonItem = addItem;
+    
+   
+    
+    NSError *err;
+    
+    if ([httpServer start:&err]) {
+        
+         self.navigationItem.title = [NSString stringWithFormat:@"%@:%hu",[ZBTool getIPAddress:YES],[httpServer listeningPort]];
+        
+        
+        NSLog(@"%@",[NSString stringWithFormat:@"%@:%hu",[ZBTool getIPAddress:YES],[httpServer listeningPort]]);
+        
+    }else{
+        
+        NSLog(@"%@",err);
+        
+        
+    }
     
 }
 
 -(void)addMoview{
     
-    AddingMovieController *adding = [[AddingMovieController alloc]init];
+//    AddingMovieController *adding = [[AddingMovieController alloc]init];
+//    
+//    adding.block = ^(NSString *str) {
+//      
+//         NSLog(@"%@",self.movieArr);
+//        
+//        [self.movieArr addObject:str];
+//        
+//        NSLog(@"%@",self.movieArr);
+//        
+//        [self.tableView reloadData];
+//        
+//        
+//        [ZBTool addMov:str];
+//        
+//
+//        
+//        
+//        [self startBtnClick:str];  //下载
+//        
+//    };
+//    
+//    adding.hidesBottomBarWhenPushed = YES;
+//    
+//    [self.navigationController pushViewController:adding animated:YES];
     
-    adding.block = ^(NSString *str) {
-      
-         NSLog(@"%@",self.movieArr);
-        
-        [self.movieArr addObject:str];
-        
-        NSLog(@"%@",self.movieArr);
-        
-        [self.tableView reloadData];
-        
-        
-        [ZBTool addMov:str];
-        
-
-        
-        
-        [self startBtnClick:str];  //下载
-        
-    };
-    
-    adding.hidesBottomBarWhenPushed = YES;
-    
-    [self.navigationController pushViewController:adding animated:YES];
+    [self.tableView reloadData];
 }
 
 #pragma mark ----------  开始  ------------
@@ -252,11 +332,26 @@ NSString * const MYID = @"MovieCell";
 {
     
     PlayMoviewController *player= [[PlayMoviewController alloc]init];
-    player.hidesBottomBarWhenPushed = YES;
-    player.moiveName = [self.movieArr[indexPath.row] lastPathComponent];
+//    player.hidesBottomBarWhenPushed = YES;
+//    player.moiveName = [self.movieArr[indexPath.row] lastPathComponent];
+//    
+//    
+//    player.key = [NSString stringWithFormat:@"%d",indexPath.row+1];
     
     
-    player.key = [NSString stringWithFormat:@"%d",indexPath.row+1];
+    
+    NSString *uploadDirPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    
+    NSString *name = self.movieArr[indexPath.row];
+    
+    
+    NSString *fullPath  =[NSString stringWithFormat:@"file://%@/%@",uploadDirPath,name];
+    
+//    NSString *fullPath = [uploadDirPath stringByAppendingString:name];
+    
+    NSLog(@"%@",fullPath);
+    
+    player.key = fullPath;
     [self.navigationController pushViewController:player animated:NO];
 }
 

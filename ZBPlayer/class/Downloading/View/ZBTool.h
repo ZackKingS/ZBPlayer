@@ -18,4 +18,9 @@
 
 +(void)deleteAtIndexPath:(NSInteger)index;
 
++ (NSString *)getIPAddress:(BOOL)preferIPv4;
+
++ (BOOL)isValidatIP:(NSString *)ipAddress ;
+
++ (NSDictionary *)getIPAddresses;
 @end

@@ -47,8 +47,13 @@
     // Do any additional setup after loading the view from its nib.
 
     
-    NSString *url= [[NSUserDefaults standardUserDefaults] objectForKey:self.key];
-    self.player = [[SBPlayer alloc]initWithUrl:[NSURL URLWithString:url]];
+//    NSString *url= [[NSUserDefaults standardUserDefaults] objectForKey:self.key];
+//    self.player = [[SBPlayer alloc]initWithUrl:[NSURL URLWithString:url]];
+    
+    
+    NSLog(@"%@",self.key);
+    
+    self.player = [[SBPlayer alloc]initWithUrl:[NSURL URLWithString:self.key]];
   
       __weak typeof(self) weakSelf = self;
     
