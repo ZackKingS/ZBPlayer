@@ -3952,6 +3952,10 @@ enum GCDAsyncSocketConfig
 {
 	__block float result = 0.0F;
 	
+    
+    
+    NSLog(@"---progressOfReadReturningTag---donePtr------%d",donePtr);
+    
 	dispatch_block_t block = ^{
 		
 		if (!currentRead || ![currentRead isKindOfClass:[GCDAsyncReadPacket class]])

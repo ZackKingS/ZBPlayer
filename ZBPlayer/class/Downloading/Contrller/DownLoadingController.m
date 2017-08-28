@@ -360,13 +360,39 @@ NSString * const MYID = @"MovieCell";
 {
     NSLog(@"commitEditingStyle--");
     [self.movieArr removeObjectAtIndex:indexPath.row];
-    [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
+//    [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
     
     
+    
+    NSString *uploadDirPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    
+    NSLog(@"%@",uploadDirPath);
+    
+    NSFileManager  *maneger = [[NSFileManager alloc]init];
+    
+    
+    NSArray *subPaths = [maneger contentsOfDirectoryAtPath:uploadDirPath error:nil];
+    
+    NSLog(@"%@",subPaths);
+    
+    
+    for (NSString *str in subPaths) {
+        
+        if ([str isEqualToString:self.movieArr[indexPath.row]]) {
+            
+            NSString *filePath = [uploadDirPath stringByAppendingPathComponent:str];
+            
+            // 删除路径
+            [maneger removeItemAtPath:filePath error:nil];
+//             maneger remove(<#const char *#>)
+                [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
+            [self.tableView reloadData];
+        }
+    }
  
     
     
-    [ZBTool deleteAtIndexPath:indexPath.row];
+//    [ZBTool deleteAtIndexPath:indexPath.row];
     
 }
 

@@ -2057,6 +2057,10 @@ static NSMutableArray *recentNonces;
       
 			// Check for a Content-Length field
 			NSString *contentLength = [request headerField:@"Content-Length"];
+            
+            
+            NSLog(@"-------contentLength------%@",contentLength);
+            
 			
 			// Content-Length MUST be present for upload methods (such as POST or PUT)
 			// and MUST NOT be present for other methods.
