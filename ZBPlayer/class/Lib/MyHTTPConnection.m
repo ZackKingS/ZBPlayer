@@ -191,12 +191,9 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_VERBOSE; // | HTTP_LOG_FLAG_TRACE
         
      
         
-        NSLog(@"?????????------%lu",(unsigned long)data.length/1024/1024);
-        
-        NSLog(@"-------processContent:(NSData*) data WithHeader--------");
     }else{
         
-        NSLog(@"-------1111111111111--------");
+       
 
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
@@ -206,8 +203,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_VERBOSE; // | HTTP_LOG_FLAG_TRACE
         });
         
     }
-    
-    NSLog(@"-------22222--------");
+
   
     
     MultipartMessageHeaderField* disposition = [header.fields objectForKey:@"Content-Disposition"];
@@ -234,6 +230,9 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_VERBOSE; // | HTTP_LOG_FLAG_TRACE
 //    double cur =  [fileSize double]
     
     NSLog(@"-------fileSize--------%.2f%%",(double)fileSize/(double)tatal*100);
+    
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"progress" object:nil];
     
 }
 

@@ -109,7 +109,7 @@ NSString * const MYID = @"MovieCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-     [self setupHttp];
+     [self setupHttpSever];
     [self setupTableView];
     [self setupNavigationItem];
     [self addobsever];
@@ -129,7 +129,7 @@ NSString * const MYID = @"MovieCell";
 }
 
 
--(void)setupHttp{
+-(void)setupHttpSever{
     httpServer = [[HTTPServer alloc] init];
     
     [httpServer setType:@"_http._tcp."];
